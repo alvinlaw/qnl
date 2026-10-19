@@ -145,7 +145,7 @@ def main():
     p.add_argument("--db", default=_DEFAULT_DB)
     a = p.parse_args()
     asof = store.asof_ms(a.asof)
-    con = connect(a.db)
+    con = connect(store.connect(a.db))
     if a.seed:
         n = seed(con, a.seed[0], a.seed[1], json.loads(a.spec),
                  float(a.seed[2]), a.capital, asof)

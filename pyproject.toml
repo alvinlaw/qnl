@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "qnl"
-version = "0.1.1"
+version = "0.1.2"
 description = "A PIT-disciplined, AI-native research loop for crypto strategies"
 readme = "README.md"
 requires-python = ">=3.11"
