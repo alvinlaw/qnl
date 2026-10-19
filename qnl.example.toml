@@ -1,0 +1,30 @@
+# Copy to qnl.local.toml (gitignored) and edit. Relative paths resolve against
+# this file's directory. Precedence: CLI flag > QNL_* env var > this file > defaults.
+
+[paths]
+db = "qnl.sqlite"
+reports = "reports"
+generated = "generated"
+
+[run]
+symbols = ["BTCUSDT", "ETHUSDT", "SOLUSDT"]
+fee = 0.0009
+interval = "8h"
+max_tasks = 5
+budget_usd = 2.0
+
+[llm]
+backend = "deepseek"          # deepseek | openai (ChatGPT) | anthropic
+model = ""                    # empty = provider default
+api_key_file = ""             # PATH only -- never put key material here
+base_url = ""                 # OpenAI-compatible endpoint (OpenRouter, Ollama, vLLM)
+
+[service]
+# lock = "reports/qnl.lock"   # default: <reports>/qnl.lock
+stale_hours = 26
+retries = 1
+no_network = false
+pool_symbol = "BTCUSDT"
+
+[alerts]
+webhook_url = ""              # optional JSON {"text": ...} receiver

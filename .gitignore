@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+# derived data — rebuild with: python3 -m qnl.ingest
+*.sqlite*
+reports/
+generated/
+*.log
+qnl.local.toml

@@ -1,0 +1,13 @@
+[Unit]
+Description=qnl research tick (snapshot, live/paper marks, pool, planner, report)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h
+Environment=HOME=%h
+Environment=PYTHONPATH=%h:%h/qnl
+ExecStart=/usr/bin/python3 -m qnl.service tick --config %h/qnl/qnl.local.toml
+TimeoutStartSec=3600
+Nice=10
