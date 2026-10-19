@@ -30,7 +30,11 @@ _DECAY = '''def build(params, data):
 
 def main():
     d = tempfile.mkdtemp()
-    bundle = {"price": [100.0 * (1.01 ** i) for i in range(40)]}
+    # varied per-bar returns, with runs: a constant-return series has no Sharpe
+    px = [100.0]
+    for i in range(39):
+        px.append(px[-1] * (1.02 if (i // 3) % 2 == 0 else 0.99))
+    bundle = {"price": px}
     for name, src in (("good", _GOOD), ("bad", _BAD), ("decay", _DECAY)):
         with open(os.path.join(d, name + ".py"), "w") as f:
             f.write(src)

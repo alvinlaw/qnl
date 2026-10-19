@@ -13,7 +13,8 @@ def sharpe_period(rets):
         return 0.0
     m = sum(rets) / n
     sd = math.sqrt(sum((r - m) ** 2 for r in rets) / (n - 1))
-    return m / sd if sd > 0 else 0.0
+    scale = max(abs(r) for r in rets)
+    return m / sd if sd > 1e-12 * scale else 0.0
 
 
 def _moments(rets):
@@ -21,7 +22,7 @@ def _moments(rets):
     n = len(rets)
     m = sum(rets) / n
     sd = math.sqrt(sum((r - m) ** 2 for r in rets) / n)
-    if sd == 0:
+    if sd <= 1e-12 * max(abs(r) for r in rets):
         return m, 0.0, 0.0, 3.0
     skew = sum((r - m) ** 3 for r in rets) / n / sd ** 3
     kurt = sum((r - m) ** 4 for r in rets) / n / sd ** 4
